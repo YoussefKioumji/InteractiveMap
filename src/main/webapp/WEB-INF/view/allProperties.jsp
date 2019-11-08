@@ -9,12 +9,6 @@
         <div class="w3-row-padding w3-margin-top">
             <h2>All Properties</h2>
             <table border="1" class="w3-table w3-bordered w3-striped">
-                <col style="width:5%">
-                <col style="width:5%">
-                <col style="width:10%">
-                <col style="width:40%">
-                <col style="width:20%">
-                <col style="width:20%">
                 <thead>
                     <tr>
                         <th>Property code</th>

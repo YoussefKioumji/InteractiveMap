@@ -1,6 +1,5 @@
 package com.training.interactivemap.controller;
 
-import com.training.interactivemap.data.mapping.PictureMapper;
 import com.training.interactivemap.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 public class PictureController {
     @Autowired
     private PictureService pictureService;
-
-    @Autowired
-    private PictureMapper pictureMapper;
 
     @GetMapping(value = "picture/{id}")
     public ResponseEntity<byte[]> findPicturesByPropertyId(@PathVariable Integer id) {

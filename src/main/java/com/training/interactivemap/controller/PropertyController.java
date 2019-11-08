@@ -18,9 +18,12 @@ public class PropertyController {
 
     @RequestMapping("/home")
     public ModelAndView showHomePage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
-        return modelAndView;
+        return new ModelAndView("home");
+    }
+
+    @RequestMapping("showRange")
+    public ModelAndView showRangePage() {
+        return new ModelAndView("rangePage");
     }
 
     @GetMapping(value = "/properties/page={page}")
@@ -32,21 +35,16 @@ public class PropertyController {
         return modelAndView;
     }
 
-    @RequestMapping("showRange")
-    public ModelAndView showRangePage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("rangePage");
-        return modelAndView;
-    }
-
     @GetMapping(value = "/range/page={page}")
     public ModelAndView showAllPropertiesWithinRange(@PathVariable int page, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Property> properties = propertyService.findAllPropertiesWithinRange(page, Double.parseDouble(request.getParameter("x")), Double.parseDouble(request.getParameter("y")));
+        String x = request.getParameter("x");
+        String y = request.getParameter("y");
+        List<Property> properties = propertyService.findAllPropertiesWithinRange(page, Double.parseDouble(x), Double.parseDouble(y));
         modelAndView.addObject("properties", properties);
         modelAndView.addObject("numberOfPages", properties.size() + 1);
-        modelAndView.addObject("x", request.getParameter("x"));
-        modelAndView.addObject("y", request.getParameter("y"));
+        modelAndView.addObject("x", x);
+        modelAndView.addObject("y", y);
         modelAndView.setViewName("rangeProperties");
         return modelAndView;
     }

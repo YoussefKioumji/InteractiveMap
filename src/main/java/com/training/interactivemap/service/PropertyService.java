@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,26 +24,26 @@ public class PropertyService {
     @Autowired
     private PropertyRepository propertyRepository;
 
-    @Autowired
-    private PictureRepository pictureRepository;
-
-    @Autowired
-    private PropertyMapper propertyMapper;
-
-    @Autowired
-    private PictureMapper pictureMapper;
-
-    private List<PictureDto> convertPicturesToDto(List<Picture> pictures) {
-        return pictures.stream()
-                .map(pictureMapper::pictureToDto)
-                .collect(Collectors.toList());
-    }
-
-    private List<PropertyDto> convertPropertiesToDto(List<Property> properties) {
-        return properties.stream()
-                .map(propertyMapper::propertyToDto)
-                .collect(Collectors.toList());
-    }
+//    @Autowired
+//    private PictureRepository pictureRepository;
+//
+//    @Autowired
+//    private PropertyMapper propertyMapper;
+//
+//    @Autowired
+//    private PictureMapper pictureMapper;
+//
+//    private List<PictureDto> convertPicturesToDto(List<Picture> pictures) {
+//        return pictures.stream()
+//                .map(pictureMapper::pictureToDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    private List<PropertyDto> convertPropertiesToDto(List<Property> properties) {
+//        return properties.stream()
+//                .map(propertyMapper::propertyToDto)
+//                .collect(Collectors.toList());
+//    }
 
     public List<Property> findAllProperties(int page) {
         Pageable numberOfPropertiesPerPage = PageRequest.of(page - 1, PAGE_SIZE_FOR_PROPERTIES);
