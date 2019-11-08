@@ -16,10 +16,10 @@ public class Property {
     private String address;
 
     @Column(name = "x_axis")
-    private BigDecimal xAxis;
+    private Double xAxis;
 
     @Column(name = "y_axis")
-    private BigDecimal yAxis;
+    private Double yAxis;
 
     @OneToMany(mappedBy = "property")
     private List<Picture> pictures;
@@ -64,19 +64,34 @@ public class Property {
         this.address = address;
     }
 
-    public BigDecimal getxAxis() {
+    public Double getxAxis() {
         return xAxis;
     }
 
-    public void setxAxis(BigDecimal xAxis) {
+    public void setxAxis(Double xAxis) {
         this.xAxis = xAxis;
     }
 
-    public BigDecimal getyAxis() {
+    public Double getyAxis() {
         return yAxis;
     }
 
-    public void setyAxis(BigDecimal yAxis) {
+    public void setyAxis(Double yAxis) {
         this.yAxis = yAxis;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                '}';
     }
 }
