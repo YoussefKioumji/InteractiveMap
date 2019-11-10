@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PropertyService {
@@ -24,8 +26,8 @@ public class PropertyService {
     @Autowired
     private PropertyRepository propertyRepository;
 
-//    @Autowired
-//    private PictureRepository pictureRepository;
+    @Autowired
+    private PictureRepository pictureRepository;
 //
 //    @Autowired
 //    private PropertyMapper propertyMapper;
@@ -50,6 +52,10 @@ public class PropertyService {
         return propertyRepository.findAll(numberOfPropertiesPerPage).getContent();
     }
 
+    public List<Property> findAllPropertiesWithoutPagination() {
+        return (List<Property>)propertyRepository.findAll();
+    }
+
     public int numberOfRows() {
         return propertyRepository.numberOfRows() / PAGE_SIZE_FOR_PROPERTIES;
     }
@@ -62,7 +68,7 @@ public class PropertyService {
         for (int i = properties.size() - 1; i >= 0; i--) {
             double xProperty = properties.get(i).getxAxis();
             double yProperty = properties.get(i).getyAxis();
-            if (Math.sqrt((x - xProperty) * (x - xProperty) + (y - yProperty)*(7 - yProperty)) > 10) {
+            if (Math.sqrt((x - xProperty) * (x - xProperty) + (y - yProperty)*(y - yProperty)) > 10) {
                 properties.remove(i);
             }
         }
@@ -72,5 +78,35 @@ public class PropertyService {
     private List<Property> getPage(List<Property> sourceList, int page) {
         int fromIndex = (page - 1) * PropertyService.PAGE_SIZE_FOR_PROPERTIES;
         return sourceList.subList(fromIndex, Math.min(fromIndex + PropertyService.PAGE_SIZE_FOR_PROPERTIES, sourceList.size()));
+    }
+
+    @Transactional
+    public void deletePropertyWithPicture(Integer id) {
+        pictureRepository.deleteByPropertyId(id);
+        propertyRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void createProperty(Integer rooms, Double area, String description, String address, Double xAxis, Double yAxis, MultipartFile[] pictures) {
+        Property property = new Property();
+        property.setRooms(rooms);
+        property.setArea(area);
+        property.setDescription(description);
+        property.setAddress(address);
+        property.setxAxis(xAxis);
+        property.setyAxis(yAxis);
+        Property latestProperty = propertyRepository.save(property);
+
+        for (MultipartFile picture : pictures) {
+            Picture dbPicture = new Picture();
+            try {
+                dbPicture.setPicture(picture.getBytes());
+                dbPicture.setType(picture.getContentType());
+                dbPicture.setProperty(latestProperty);
+                pictureRepository.save(dbPicture);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.training.interactivemap.data.entity;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -11,7 +10,7 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer rooms;
-    private BigDecimal area;
+    private Double area;
     private String description;
     private String address;
 
@@ -40,11 +39,11 @@ public class Property {
         this.rooms = rooms;
     }
 
-    public BigDecimal getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(BigDecimal area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 

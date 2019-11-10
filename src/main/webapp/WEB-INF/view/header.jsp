@@ -13,8 +13,11 @@
                 <div class="w3-right">
                     <a href="${pageContext.request.contextPath}/interactive-map/properties/page=1"><c:out value="Properties"/></a>
                     <a href="${pageContext.request.contextPath}/interactive-map/showRange"><c:out value="Properties within range"/></a>
+                    <a href="${pageContext.request.contextPath}/interactive-map/deletePage"><c:out value="Delete property"/></a>
+                    <a href="${pageContext.request.contextPath}/interactive-map/createPage"><c:out value="Create property"/></a>
                 </div>
             </div>
         </div>
+        <br>
     </body>
 </html>

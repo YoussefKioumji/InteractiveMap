@@ -1,12 +1,11 @@
 package com.training.interactivemap.data.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class PropertyDto {
     private Integer id;
     private Integer rooms;
-    private BigDecimal area;
+    private Double area;
     private String description;
     private String address;
     private Double xAxis;
@@ -29,11 +28,11 @@ public class PropertyDto {
         this.rooms = rooms;
     }
 
-    public BigDecimal getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(BigDecimal area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
