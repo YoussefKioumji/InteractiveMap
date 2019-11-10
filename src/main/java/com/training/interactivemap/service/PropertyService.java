@@ -28,9 +28,9 @@ public class PropertyService {
 
     @Autowired
     private PictureRepository pictureRepository;
-//
-//    @Autowired
-//    private PropertyMapper propertyMapper;
+
+    @Autowired
+    private PropertyMapper propertyMapper;
 //
 //    @Autowired
 //    private PictureMapper pictureMapper;
@@ -87,15 +87,8 @@ public class PropertyService {
     }
 
     @Transactional
-    public void createProperty(Integer rooms, Double area, String description, String address, Double xAxis, Double yAxis, MultipartFile[] pictures) {
-        Property property = new Property();
-        property.setRooms(rooms);
-        property.setArea(area);
-        property.setDescription(description);
-        property.setAddress(address);
-        property.setxAxis(xAxis);
-        property.setyAxis(yAxis);
-        Property latestProperty = propertyRepository.save(property);
+    public void createOrUpdateProperty(PropertyDto propertyDto, MultipartFile[] pictures) {
+        Property latestProperty = propertyRepository.save(propertyMapper.dtoToProperty(propertyDto));
 
         for (MultipartFile picture : pictures) {
             Picture dbPicture = new Picture();

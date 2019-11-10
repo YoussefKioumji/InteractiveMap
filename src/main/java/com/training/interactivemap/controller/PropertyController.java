@@ -1,5 +1,6 @@
 package com.training.interactivemap.controller;
 
+import com.training.interactivemap.data.dto.PropertyDto;
 import com.training.interactivemap.data.entity.Property;
 import com.training.interactivemap.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,18 +43,36 @@ public class PropertyController {
         ModelAndView modelAndView = new ModelAndView();
         propertyService.deletePropertyWithPicture(id);
         modelAndView.addObject("message", "The property has been successfully deleted");
+        modelAndView.addObject("properties", propertyService.findAllPropertiesWithoutPagination());
         modelAndView.setViewName("deletePage");
         return modelAndView;
     }
 
     @PostMapping(value = "/create")
-    public ModelAndView createProperty(@RequestParam Integer rooms, @RequestParam Double area, @RequestParam String description,
-                                       @RequestParam String address, @RequestParam Double xAxis, @RequestParam Double yAxis,
-                                       @RequestParam MultipartFile[] pictures) {
+    public ModelAndView createProperty(PropertyDto propertyDto, @RequestParam MultipartFile[] pictures) {
         ModelAndView modelAndView = new ModelAndView();
-        propertyService.createProperty(rooms, area, description, address, xAxis, yAxis, pictures);
-        modelAndView.addObject("message", "The property has been successfully created");
+        if (pictures.length > 10) {
+            modelAndView.addObject("message", "Cannot upload more than 10 pictures for one property");
+        } else {
+            propertyService.createOrUpdateProperty(propertyDto, pictures);
+            modelAndView.addObject("message", "The property has been successfully created");
+        }
+        modelAndView.addObject("properties", propertyService.findAllPropertiesWithoutPagination());
         modelAndView.setViewName("createPage");
+        return modelAndView;
+    }
+
+    @PostMapping(value = "/update")
+    public ModelAndView updateProperty(PropertyDto propertyDto, @RequestParam MultipartFile[] pictures) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (pictures.length > 10) {
+            modelAndView.addObject("message", "Cannot upload more than 10 pictures for one property");
+        } else {
+            propertyService.createOrUpdateProperty(propertyDto, pictures);
+            modelAndView.addObject("message", "The property has been successfully updated");
+        }
+        modelAndView.addObject("properties", propertyService.findAllPropertiesWithoutPagination());
+        modelAndView.setViewName("updatePage");
         return modelAndView;
     }
 }

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix = "form" uri = "http://www.springframework.org/tags/form"%>
-<htmml>
+<html>
     <body>
         <c:set var="pageTitle" value="Create Page"/>
         <jsp:include page="header.jsp">
@@ -36,4 +35,4 @@
             <c:out value="${message}"/>
         </c:if>
     </body>
-</htmml>
+</html>

@@ -1,7 +1,5 @@
 package com.training.interactivemap.data.dto;
 
-import java.util.List;
-
 public class PropertyDto {
     private Integer id;
     private Integer rooms;
@@ -10,7 +8,6 @@ public class PropertyDto {
     private String address;
     private Double xAxis;
     private Double yAxis;
-    private List<PictureDto> pictures;
 
     public Integer getId() {
         return id;
@@ -66,13 +63,5 @@ public class PropertyDto {
 
     public void setyAxis(Double yAxis) {
         this.yAxis = yAxis;
-    }
-
-    public List<PictureDto> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<PictureDto> pictures) {
-        this.pictures = pictures;
     }
 }

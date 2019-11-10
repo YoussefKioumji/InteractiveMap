@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<htmml>
+<html>
     <body>
         <c:set var="pageTitle" value="Delete Page"/>
         <jsp:include page="header.jsp">
@@ -19,4 +19,4 @@
             <c:out value="${message}"/>
         </c:if>
     </body>
-</htmml>
+</html>

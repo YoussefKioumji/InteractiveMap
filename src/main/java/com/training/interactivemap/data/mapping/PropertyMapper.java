@@ -7,7 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PropertyMapper {
     PropertyDto propertyToDto(Property property);
-
-//    @InheritInverseConfiguration
-//    Property dtoToProperty(PropertyDto propertyDto);
+    Property dtoToProperty(PropertyDto propertyDto);
 }

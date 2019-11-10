@@ -15,6 +15,7 @@
                     <a href="${pageContext.request.contextPath}/interactive-map/showRange"><c:out value="Properties within range"/></a>
                     <a href="${pageContext.request.contextPath}/interactive-map/deletePage"><c:out value="Delete property"/></a>
                     <a href="${pageContext.request.contextPath}/interactive-map/createPage"><c:out value="Create property"/></a>
+                    <a href="${pageContext.request.contextPath}/interactive-map/updatePage"><c:out value="Update property"/></a>
                 </div>
             </div>
         </div>

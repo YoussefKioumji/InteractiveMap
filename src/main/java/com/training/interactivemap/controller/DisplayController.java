@@ -21,7 +21,7 @@ public class DisplayController {
         return new ModelAndView("rangePage");
     }
 
-    @RequestMapping("/interactive-map/deletePage")
+    @RequestMapping(value = "/interactive-map/deletePage")
     public ModelAndView showDeletePage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("properties", propertyService.findAllPropertiesWithoutPagination());
@@ -29,8 +29,16 @@ public class DisplayController {
         return modelAndView;
     }
 
-    @RequestMapping("/interactive-map/createPage")
+    @RequestMapping(value = "/interactive-map/createPage")
     public ModelAndView showCreatePage() {
         return new ModelAndView("createPage");
+    }
+
+    @RequestMapping(value = "/interactive-map/updatePage")
+    public ModelAndView showUpdatePage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("properties", propertyService.findAllPropertiesWithoutPagination());
+        modelAndView.setViewName("updatePage");
+        return modelAndView;
     }
 }
