@@ -12,7 +12,7 @@ public class PictureController {
     @Autowired
     private PictureService pictureService;
 
-    @GetMapping(value = "picture/{id}")
+    @GetMapping(value = "/picture/{id}")
     public ResponseEntity<byte[]> findPicturesByPropertyId(@PathVariable Integer id) {
         return new ResponseEntity<>(pictureService.findPicturesByPropertyId(id).get().getPicture(), HttpStatus.OK);
     }

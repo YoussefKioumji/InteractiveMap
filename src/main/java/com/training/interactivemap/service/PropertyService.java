@@ -1,10 +1,8 @@
 package com.training.interactivemap.service;
 
-import com.training.interactivemap.data.dto.PictureDto;
 import com.training.interactivemap.data.dto.PropertyDto;
 import com.training.interactivemap.data.entity.Picture;
 import com.training.interactivemap.data.entity.Property;
-import com.training.interactivemap.data.mapping.PictureMapper;
 import com.training.interactivemap.data.mapping.PropertyMapper;
 import com.training.interactivemap.data.repository.PictureRepository;
 import com.training.interactivemap.data.repository.PropertyRepository;
@@ -31,21 +29,6 @@ public class PropertyService {
 
     @Autowired
     private PropertyMapper propertyMapper;
-//
-//    @Autowired
-//    private PictureMapper pictureMapper;
-//
-//    private List<PictureDto> convertPicturesToDto(List<Picture> pictures) {
-//        return pictures.stream()
-//                .map(pictureMapper::pictureToDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private List<PropertyDto> convertPropertiesToDto(List<Property> properties) {
-//        return properties.stream()
-//                .map(propertyMapper::propertyToDto)
-//                .collect(Collectors.toList());
-//    }
 
     public List<Property> findAllProperties(int page) {
         Pageable numberOfPropertiesPerPage = PageRequest.of(page - 1, PAGE_SIZE_FOR_PROPERTIES);
