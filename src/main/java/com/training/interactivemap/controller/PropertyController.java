@@ -21,7 +21,7 @@ public class PropertyController {
     public ModelAndView showAllProperties(@PathVariable int page) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("properties", propertyService.findAllProperties(page));
-        modelAndView.addObject("numberOfPages", propertyService.numberOfRows());
+        modelAndView.addObject("numberOfPages", propertyService.numberOfRows() + 1);
         modelAndView.setViewName("allProperties");
         return modelAndView;
     }
